@@ -41,7 +41,7 @@ class Footerx extends React.Component {
                                 title: "Thanks for visting! Please Share this application",
                                 icon: (
                                     // <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
-                                    <WhatsappShareButton id={"whatsapp"} title='Covid-19 Support Finder Tool - Action Plan' url="ABC" ><WhatsAppIcon></WhatsAppIcon></WhatsappShareButton>
+                                    <WhatsappShareButton id={"whatsapp"} title='Co-Plasma Web Application' url="https://co-plasma.herokuapp.com/" ><WhatsAppIcon></WhatsAppIcon></WhatsappShareButton>
                                     
                                 ),
                                
