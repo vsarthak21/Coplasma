@@ -85,7 +85,9 @@ const Navibar = (props) => {
             Recoverd pateints of Covid-19 with <br /> negative RTPCR report can
             donate
           </h5>
-          <Button className={classes.buttonRN}>Register as Donor</Button>{" "}
+          <Button className={classes.buttonRN} onClick={()=>{
+            window.open("https://forms.gle/ENNfozYChwQaaSNZ6")
+          }}>Register as Donor</Button>{" "}
         </div>
         <div className={classes.registerCard}>
           <h2>Need Plasma?</h2>
@@ -93,7 +95,9 @@ const Navibar = (props) => {
             If you are looking out for a donor, <br /> register here with
             patient's details
           </h5>
-          <Button className={classes.buttonRN}>Register a Patient</Button>
+          <Button className={classes.buttonRN} onClick={()=>{
+            window.open("https://forms.gle/zRzgXPJo2mw2fgrx7")
+          }}>Register a Patient</Button>
         </div>
       </div>
 
