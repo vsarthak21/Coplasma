@@ -17,6 +17,7 @@
     "react-scripts": "4.0.1",
     "react-scroll": "^1.8.2",
     "react-share": "^4.4.0",
+    "tabletop": "^1.6.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

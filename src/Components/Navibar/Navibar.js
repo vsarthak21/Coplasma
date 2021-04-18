@@ -1,17 +1,43 @@
 import classes from "../Navibar/Navbar.module.css";
-import Footerx from "../Footerx/Footerx"
+import Footerx from "../Footerx/Footerx";
 import { grey } from "@material-ui/core/colors";
 import React, { useState, useRef } from "react";
 import { Button } from "react-bootstrap";
 import { ReactComponent as Logo } from "../../Images/Plasma.svg";
 import hospital from "../../Images/hospital.png";
 import help from "../../Images/help.png";
+import Donor from "../Donor/Donor";
+import Tabletop from "tabletop";
 
 const Navibar = (props) => {
-  const [expanded, setExpanded] = useState(false);
+  const [contact, setContact] = useState("");
+  const [data, setData] = useState([]);
+  const [display, setDisplay] = useState(false);
+  // const []
   const offset = window.matchMedia("(max-width: 600px)").matches ? -300 : -75;
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView();
+
+  const verifyContact = () => {
+    Tabletop.init({
+      key: "14df21AdThWXtcc28keeAUZg5eFMO5hYXkfL6QNdNvFQ",
+      simpleSheet: true,
+    })
+      .then((data) => setData(data))
+      .catch((err) => console.warn(err));
+
+    let v = data.find(
+      (x) =>
+        x[
+          "Mobile Number which can be contacted? You can mention more than one contact number as well, separated by commas."
+        ] == contact
+    );
+    console.log(data, v);
+    if (v) {
+      setDisplay(true);
+    }
+  };
+
   return (
     <>
       <div className={classes.brand}>
@@ -37,7 +63,7 @@ const Navibar = (props) => {
           <p>
             COVID-19 has been on a rampage in our city since the past 1 year.
             From less than 10 cases in February 2020, we are now having more
-            than 20,0000 cases. The good news is that we have been able to
+            than 25,000 cases. The good news is that we have been able to
             recover more than 90% COVID-19 patients. These patients can help the
             COVID-19 patients by donating their plasma, as a possible cure. With
             the vaccination drive underway across the country, there are still a
@@ -85,9 +111,14 @@ const Navibar = (props) => {
             Recoverd pateints of Covid-19 with <br /> negative RTPCR report can
             donate
           </h5>
-          <Button className={classes.buttonRN} onClick={()=>{
-            window.open("https://forms.gle/ENNfozYChwQaaSNZ6")
-          }}>Register as Donor</Button>{" "}
+          <Button
+            className={classes.buttonRN}
+            onClick={() => {
+              window.open("https://forms.gle/ENNfozYChwQaaSNZ6");
+            }}
+          >
+            Register as Donor
+          </Button>{" "}
         </div>
         <div className={classes.registerCard}>
           <h2>Need Plasma?</h2>
@@ -95,11 +126,40 @@ const Navibar = (props) => {
             If you are looking out for a donor, <br /> register here with
             patient's details
           </h5>
-          <Button className={classes.buttonRN} onClick={()=>{
-            window.open("https://forms.gle/zRzgXPJo2mw2fgrx7")
-          }}>Register a Patient</Button>
+          <Button
+            className={classes.buttonRN}
+            onClick={() => {
+              window.open("https://forms.gle/zRzgXPJo2mw2fgrx7");
+            }}
+          >
+            Register a Patient
+          </Button>
+        </div>
+        <div className={classes.registerCard}>
+          <h2>Already registered the patient?</h2>
+          <h5>
+            Please fill the contact number <br /> used during registration below
+            <br /> to access the donor's list:
+          </h5>
+          <input
+            style={{ margin: "10px" }}
+            type="txt"
+            onChange={(e) => {
+              setContact(e.target.value);
+            }}
+          ></input>
+          <Button className={classes.buttonRN} onClick={verifyContact}>
+            Go
+          </Button>
         </div>
       </div>
+
+      {display ? (
+        <div className={classes.donor}>
+          <h1>Donor's List:</h1>
+          <Donor></Donor>
+        </div>
+      ) : null}
 
       <div className={classes.faqs}>
         <div>
@@ -128,6 +188,7 @@ const Navibar = (props) => {
           </ul>
         </div>
       </div>
+
       <Footerx></Footerx>
     </>
   );
